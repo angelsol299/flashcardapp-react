@@ -2,31 +2,40 @@ import React, { Component } from "react";
 import Card from "./Card/Card";
 import DrawButton from "./DrawButton/DrawButton";
 import { DB_CONFIG } from "./Config/Firebase/db_config";
-
+import firebase from "firebase/app";
+import "firebase/database";
 import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    this.app = firebase.initializeApp(DB_CONFIG);
+    this.database = this.app
+      .database()
+      .ref()
+      .child("cards");
     this.updateCard = this.updateCard.bind(this);
 
     this.state = {
-      cards: [
-        { id: 1, eng: "English", han: "Hnazi", pin: "Pinyin" },
-        { id: 2, eng: "English_2", han: "Hnazi_2", pin: "Pinyin_2" },
-        { id: 3, eng: "English_3", han: "Hnazi_3", pin: "Pinyin_4" },
-        { id: 4, eng: "English_4", han: "Hnazi_4", pin: "Pinyin_4" }
-      ],
+      cards: [],
       currentCard: {}
     };
   }
 
   componentWillMount() {
     const currentCards = this.state.cards;
-    this.setState({
-      cards: currentCards,
-      currentCard: this.getRandomCard(currentCards)
+    this.database.on("child_added", snap => {
+      currentCards.push({
+        id: snap.key,
+        eng: snap.val().eng,
+        han: snap.val().han,
+        pin: snap.val().pin
+      });
+      this.setState({
+        cards: currentCards,
+        currentCard: this.getRandomCard(currentCards)
+      });
     });
   }
 
