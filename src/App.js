@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card/Card";
 import DrawButton from "./DrawButton/DrawButton";
+import { DB_CONFIG } from "./Config/Firebase/db_config";
 
 import "./App.css";
 
@@ -13,7 +14,9 @@ class App extends Component {
     this.state = {
       cards: [
         { id: 1, eng: "English", han: "Hnazi", pin: "Pinyin" },
-        { id: 2, eng: "English_2", han: "Hnazi_2", pin: "Pinyin_2" }
+        { id: 2, eng: "English_2", han: "Hnazi_2", pin: "Pinyin_2" },
+        { id: 3, eng: "English_3", han: "Hnazi_3", pin: "Pinyin_4" },
+        { id: 4, eng: "English_4", han: "Hnazi_4", pin: "Pinyin_4" }
       ],
       currentCard: {}
     };
@@ -33,7 +36,10 @@ class App extends Component {
   }
 
   updateCard() {
-    console.log("working method");
+    const currentCards = this.state.cards;
+    this.setState({
+      currentCard: this.getRandomCard(currentCards)
+    });
   }
 
   render() {
