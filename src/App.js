@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FlasCards from "./components/flashCards";
+import Card from "./Card/Card";
 
 import "./App.css";
 
@@ -7,8 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Welcome</h1>
-        <FlasCards />
+        <Card />
       </div>
     );
   }
