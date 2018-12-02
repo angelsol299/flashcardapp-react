@@ -29,7 +29,7 @@ class App extends Component {
       currentCards.push({
         id: snap.key,
         eng: snap.val().eng,
-        han: snap.val().han,
+        spa: snap.val().spa,
         pin: snap.val().pin
       });
       this.setState({
@@ -55,9 +55,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="cardRow">
+          <p
+            style={{ textAlign: "center", fontSize: "25px", color: "darkblue" }}
+          >
+            Best Spanish Words
+          </p>
           <Card
             eng={this.state.currentCard.eng}
-            han={this.state.currentCard.han}
+            spa={this.state.currentCard.spa}
             pin={this.state.currentCard.pin}
           />
           <div className="buttonRow">

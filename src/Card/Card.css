@@ -2,11 +2,12 @@
   cursor: pointer;
   height: 400px;
   width: 400px;
-  perspective: 700px;
+  perspective: 800px;
   position: relative;
   margin: auto;
   transition: ease-in;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .card {
